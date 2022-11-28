@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import studentsdorm.platform.Student.StudentAbstract;
+import org.springframework.core.env.Environment;
+import org.springframework.test.context.ActiveProfiles;
 import studentsdorm.platform.Student.StudentEntity;
 import studentsdorm.platform.Student.StudentRepo;
 import studentsdorm.platform.Student.StudentService;
@@ -15,6 +16,7 @@ import studentsdorm.platform.Student.StudentService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 import static org.mockito.Mockito.*;
 
@@ -38,7 +40,7 @@ public class StudentTest {
 
 		when(studentRepo.findById(1L)).thenReturn(Optional.ofNullable(students.get(0)));
 
-		StudentEntity studentEntity = studentService.getStudent(1L);
+		StudentEntity studentEntity = studentService.getStudentTest(1L);
 
 		Assertions.assertEquals(student, studentEntity);
 		verify(studentRepo, times(1)).findById(1L);
