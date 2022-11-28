@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import studentsdorm.platform.Student.StudentAbstract;
 import studentsdorm.platform.Student.StudentEntity;
 import studentsdorm.platform.Student.StudentRepo;
 import studentsdorm.platform.Student.StudentService;
@@ -31,6 +32,7 @@ public class StudentTest {
 	public void testGetStudentById() {
 		List<StudentEntity> students = new ArrayList<>();
 		StudentEntity student = new StudentEntity();
+		student.setId(1L);
 
 		students.add(student);
 
@@ -46,15 +48,16 @@ public class StudentTest {
 	@DisplayName("Test getStudentByName Success")
 	public void testGetStudentByName() {
 		List<StudentEntity> students = new ArrayList<>();
-		StudentEntity student = new StudentEntity("Adelin");
+		StudentEntity student = new StudentEntity();
 
+		student.setName("Adelin");
 		students.add(student);
 
 		when(studentRepo.findByName("Adelin")).thenReturn(students.get(0));
 
 		StudentEntity studentEntity = studentService.getStudentByName("Adelin");
 
-		Assertions.assertEquals(student, studentEntity);
+		Assertions.assertEquals(student.getName(), studentEntity.getName());
 		verify(studentRepo, times(1)).findByName("Adelin");
 	}
 
