@@ -10,7 +10,6 @@ public class ExceptionAspect {
 
     @AfterThrowing(pointcut="execution(* *(..))", throwing="exception")
     public void processException(RuntimeException exception) {
-
         log.info(exception.getMessage());
     }
 }

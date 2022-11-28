@@ -11,7 +11,6 @@ public class LoggingAspect {
 
     @Around("@within(studentsdorm.platform.Student.*)")
     public Object log (ProceedingJoinPoint thisJoinPoint) throws Throwable {
-
 //        log.info("CALL METHOD " + methodName + " with args " + methodArgs);
 //        Object result = thisJoinPoint.proceed();
 //        log.info("METHOD " + methodName + " returns " + result);

@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.concurrent.ExecutionException;
-
-
 @Controller
 public class StudentController {
 
@@ -17,8 +14,7 @@ public class StudentController {
 
     @GetMapping("/students/{id}")
     @ResponseBody
-    public String getStudent(@PathVariable final Long id) throws ExecutionException, InterruptedException {
-
+    public String getStudent(@PathVariable final Long id) {
         return studentService.getStudent(id).getName();
     }
 }
