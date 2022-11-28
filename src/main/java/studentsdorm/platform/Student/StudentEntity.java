@@ -1,20 +1,29 @@
 package studentsdorm.platform.Student;
 
-import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Entity
-@Data
+@Setter
 @Component
-public class StudentEntity {
+@NoArgsConstructor
+@Entity
+@Table(name = "STUDENTS", schema = "STUDENTDB")
+public class StudentEntity extends StudentAbstract {
+
+    private String name;
 
     @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getId() {
+        return id;
+    }
 
-    @Column(columnDefinition = "varchar(255) default 'defaultName'")
-    private String name;
+    @Column(name = "name", columnDefinition = "varchar(255) default 'defaultName'")
+    public String getName() {
+        return name;
+    }
 }
