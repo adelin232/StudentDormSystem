@@ -1,1 +1,1 @@
-insert into student_entity () values ();
+INSERT INTO STUDENTS () VALUES ();
