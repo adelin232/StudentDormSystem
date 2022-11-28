@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -16,11 +17,7 @@ public class StudentService {
 
     public StudentEntity getStudent(final Long id) throws ExecutionException, InterruptedException {
 
-        CompletableFuture<List<StudentEntity>> future = CompletableFuture.supplyAsync(this::getStudents);
-
-        List<StudentEntity> students = future.get().stream().filter(studentEntity -> Objects.equals(studentEntity.getId(), id)).toList();
-
-        return students.size() == 1 ? students.get(0) : null;
+        return studentRepo.findById(id).orElse(null);
     }
 
     public List<StudentEntity> getStudents() {
@@ -31,5 +28,10 @@ public class StudentService {
     public void updateStudent(final Long id) throws ExecutionException, InterruptedException {
 
 //        StudentEntity student = getStudent(id);
+    }
+
+    public StudentEntity getStudentByName(final String name) throws ExecutionException, InterruptedException {
+
+        return studentRepo.findByName(name);
     }
 }

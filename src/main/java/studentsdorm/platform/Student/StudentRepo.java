@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StudentRepo extends JpaRepository<StudentEntity, Long> {
+
+    StudentEntity findByName(final String name);
 }
