@@ -45,11 +45,11 @@ public class PDFGenerator {
         document.add(new Paragraph("\n"));
 
         // Creating a table of 3 columns
-        PdfPTable table = new PdfPTable(2);
+        PdfPTable table = new PdfPTable(3);
 
         // Setting width of table, its columns and spacing
         table.setWidthPercentage(100f);
-        table.setWidths(new int[] { 3, 3 });
+        table.setWidths(new int[] { 2, 3, 3 });
         table.setSpacingBefore(5);
 
         // Create Table Cells for table header

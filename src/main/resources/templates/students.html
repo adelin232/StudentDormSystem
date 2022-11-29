@@ -6,6 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Students</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/monokai-sublime.min.css"/>
 </head>
 <style>
     background {
@@ -38,7 +41,9 @@
     <div class="background">
         <div class="content">
             <div class="col-6 mt-3" style="margin: auto; text-align: center">
-
+                <form method="post">
+                    <input class="btn btn-primary" type="submit" value="Get Students" style="margin-top:350px; width: 110px; font-weight: bold" th:action="@{/students}"/>
+                </form>
             </div>
         </div>
     </div>
