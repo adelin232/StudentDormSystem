@@ -27,6 +27,11 @@ public class StudentTest {
 	StudentRepo studentRepo;
 
 	@Test
+	public void main() {
+		PlatformApplication.main(new String[] {});
+	}
+
+	@Test
 	@DisplayName("Test getStudent Success")
 	public void testGetStudentById() throws ExecutionException, InterruptedException {
 		List<StudentEntity> students = new ArrayList<>();
