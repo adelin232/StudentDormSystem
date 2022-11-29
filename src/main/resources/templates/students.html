@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
 <head>
     <meta charset="UTF-8">
     <title>Students</title>
 </head>
+<style>
+    background {
+        position: center;
+    }
+    .background::before {
+        content: "";
+        background-image: url('/images/students.jpg');
+        background-size: cover;
+        background-repeat: repeat-y;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .content {
+        position: relative;
+    }
+    html {
+         position: relative;
+         min-height: 100%;
+         padding-bottom: 0;
+     }
+    body {
+        margin-bottom: 0;
+    }
+</style>
 <body>
+    <div class="background">
+        <div class="content">
+            <div class="col-6 mt-3" style="margin: auto; text-align: center">
 
+            </div>
+        </div>
+    </div>
 </body>
 </html>
