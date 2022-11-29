@@ -2,7 +2,7 @@ package studentsdorm.platform.Student;
 
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.MappedSuperclass;
 
 @Setter
 @MappedSuperclass
