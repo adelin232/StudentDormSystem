@@ -14,27 +14,27 @@ public class StudentService {
     @Autowired
     private StudentRepo studentRepo;
 
-    public StudentEntity getStudent(final Long id) throws ExecutionException, InterruptedException {
-        CompletableFuture<List<StudentEntity>> future = CompletableFuture.supplyAsync(this::getStudents);
+    public Student getStudent(final Long id) throws ExecutionException, InterruptedException {
+        CompletableFuture<List<Student>> future = CompletableFuture.supplyAsync(this::getStudents);
 
-        List<StudentEntity> students = future.get().stream().filter(studentEntity -> Objects.equals(studentEntity.getId(), id)).toList();
+        List<Student> students = future.get().stream().filter(studentEntity -> Objects.equals(studentEntity.getId(), id)).toList();
 
         return students.size() == 1 ? students.get(0) : null;
     }
 
-    public StudentEntity getStudentTest(final Long id) {
+    public Student getStudentTest(final Long id) {
         return studentRepo.findById(id).orElseThrow();
     }
 
-    public List<StudentEntity> getStudents() {
+    public List<Student> getStudents() {
         return studentRepo.findAll();
     }
 
-    public StudentEntity getStudentByName(final String name) {
+    public Student getStudentByName(final String name) {
         return studentRepo.findByName(name);
     }
 
-    public StudentEntity getStudentByRoom(final Long room) {
+    public Student getStudentByRoom(final Long room) {
         return studentRepo.findByRoom(room);
     }
 }

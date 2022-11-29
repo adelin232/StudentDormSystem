@@ -5,10 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StudentRepo extends JpaRepository<StudentEntity, Long> {
+public interface StudentRepo extends JpaRepository<Student, Long> {
 
-    StudentEntity findByName(final String name);
+    Student findByName(final String name);
 
-    @Query("SELECT s FROM StudentEntity s WHERE s.room = ?1")
-    StudentEntity findByRoom(final Long room);
+    @Query("SELECT s FROM Student s WHERE s.room = ?1")
+    Student findByRoom(final Long room);
 }

@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "STUDENTS", schema = "STUDENTDB")
-public class StudentEntity extends StudentAbstract {
+public class Student extends StudentAbstract {
 
     private String name;
     private Long room;

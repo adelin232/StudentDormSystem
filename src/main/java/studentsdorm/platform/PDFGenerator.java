@@ -12,7 +12,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.Setter;
-import studentsdorm.platform.Student.StudentEntity;
+import studentsdorm.platform.Student.Student;
 import studentsdorm.platform.Student.StudentService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -80,7 +80,7 @@ public class PDFGenerator {
         table.addCell(cell);
 
         // Iterating over the list of students
-        for (StudentEntity student : studentService.getStudents()) {
+        for (Student student : studentService.getStudents()) {
             table.addCell(String.valueOf(student.getId()));
             table.addCell(student.getName());
             table.addCell(String.valueOf(student.getRoom()));

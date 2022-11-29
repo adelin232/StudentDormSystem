@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import studentsdorm.platform.Student.StudentEntity;
+import studentsdorm.platform.Student.Student;
 import studentsdorm.platform.Student.StudentRepo;
 import studentsdorm.platform.Student.StudentService;
 
@@ -34,8 +34,8 @@ public class StudentTest {
 	@Test
 	@DisplayName("Test getStudent Success")
 	public void testGetStudentById() throws ExecutionException, InterruptedException {
-		List<StudentEntity> students = new ArrayList<>();
-		StudentEntity student = new StudentEntity();
+		List<Student> students = new ArrayList<>();
+		Student student = new Student();
 		student.setId(1L);
 
 		students.add(student);
@@ -44,7 +44,7 @@ public class StudentTest {
 
 		Assertions.assertNull(studentService.getStudent(1L));
 
-		StudentEntity studentEntity = studentService.getStudentTest(1L);
+		Student studentEntity = studentService.getStudentTest(1L);
 
 		Assertions.assertEquals(student, studentEntity);
 		verify(studentRepo, times(1)).findById(1L);
@@ -53,15 +53,15 @@ public class StudentTest {
 	@Test
 	@DisplayName("Test getStudentByName Success")
 	public void testGetStudentByName() {
-		List<StudentEntity> students = new ArrayList<>();
-		StudentEntity student = new StudentEntity();
+		List<Student> students = new ArrayList<>();
+		Student student = new Student();
 
 		student.setName("Adelin");
 		students.add(student);
 
 		when(studentRepo.findByName("Adelin")).thenReturn(students.get(0));
 
-		StudentEntity studentEntity = studentService.getStudentByName("Adelin");
+		Student studentEntity = studentService.getStudentByName("Adelin");
 
 		Assertions.assertEquals(student.getName(), studentEntity.getName());
 		verify(studentRepo, times(1)).findByName("Adelin");
@@ -70,15 +70,15 @@ public class StudentTest {
 	@Test
 	@DisplayName("Test getStudentByRoom Success")
 	public void testGetStudentByRoom() {
-		List<StudentEntity> students = new ArrayList<>();
-		StudentEntity student = new StudentEntity();
+		List<Student> students = new ArrayList<>();
+		Student student = new Student();
 
 		student.setRoom(239L);
 		students.add(student);
 
 		when(studentRepo.findByRoom(239L)).thenReturn(students.get(0));
 
-		StudentEntity studentEntity = studentService.getStudentByRoom(239L);
+		Student studentEntity = studentService.getStudentByRoom(239L);
 
 		Assertions.assertEquals(student.getRoom(), studentEntity.getRoom());
 		verify(studentRepo, times(1)).findByRoom(239L);
@@ -87,14 +87,14 @@ public class StudentTest {
 	@Test
 	@DisplayName("Test getStudents Success")
 	public void testGetStudents() {
-		List<StudentEntity> students = new ArrayList<>();
-		StudentEntity student = new StudentEntity("Adelin", 239L);
+		List<Student> students = new ArrayList<>();
+		Student student = new Student("Adelin", 239L);
 
 		students.add(student);
 
 		when(studentRepo.findAll()).thenReturn(students);
 
-		List<StudentEntity> studentList = studentService.getStudents();
+		List<Student> studentList = studentService.getStudents();
 
 		Assertions.assertEquals(1, studentList.size());
 		verify(studentRepo, times(1)).findAll();

@@ -34,7 +34,7 @@ public class StudentController {
     @GetMapping("/students")
     @Transactional
     public String getStudents(Model model) {
-        List<StudentEntity> students = studentService.getStudents();
+        List<Student> students = studentService.getStudents();
 
         model.addAttribute("allStudentsForm", students);
 
@@ -44,7 +44,7 @@ public class StudentController {
     @PostMapping("/students")
     @Transactional
     public String getStudentss(Model model) {
-        List<StudentEntity> payments = studentService.getStudents();
+        List<Student> payments = studentService.getStudents();
 
         model.addAttribute("allStudentsForm", payments);
 
