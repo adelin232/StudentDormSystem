@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class StudentEntity extends StudentAbstract {
 
     private String name;
+    private Long room;
 
     @Id
     @Column(name = "id")
@@ -27,5 +28,10 @@ public class StudentEntity extends StudentAbstract {
     @Column(name = "name", columnDefinition = "varchar(255) default 'defaultName'")
     public String getName() {
         return name;
+    }
+
+    @Column(name = "room")
+    public Long getRoom() {
+        return room;
     }
 }

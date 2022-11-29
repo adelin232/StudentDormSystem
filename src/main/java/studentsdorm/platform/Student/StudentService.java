@@ -1,11 +1,8 @@
 package studentsdorm.platform.Student;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -35,5 +32,9 @@ public class StudentService {
 
     public StudentEntity getStudentByName(final String name) {
         return studentRepo.findByName(name);
+    }
+
+    public StudentEntity getStudentByRoom(final Long room) {
+        return studentRepo.findByRoom(room);
     }
 }

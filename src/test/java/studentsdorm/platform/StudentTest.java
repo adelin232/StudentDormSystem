@@ -68,10 +68,27 @@ public class StudentTest {
 	}
 
 	@Test
+	@DisplayName("Test getStudentByRoom Success")
+	public void testGetStudentByRoom() {
+		List<StudentEntity> students = new ArrayList<>();
+		StudentEntity student = new StudentEntity();
+
+		student.setRoom(239L);
+		students.add(student);
+
+		when(studentRepo.findByRoom(239L)).thenReturn(students.get(0));
+
+		StudentEntity studentEntity = studentService.getStudentByRoom(239L);
+
+		Assertions.assertEquals(student.getRoom(), studentEntity.getRoom());
+		verify(studentRepo, times(1)).findByRoom(239L);
+	}
+
+	@Test
 	@DisplayName("Test getStudents Success")
 	public void testGetStudents() {
 		List<StudentEntity> students = new ArrayList<>();
-		StudentEntity student = new StudentEntity("Adelin");
+		StudentEntity student = new StudentEntity("Adelin", 239L);
 
 		students.add(student);
 
