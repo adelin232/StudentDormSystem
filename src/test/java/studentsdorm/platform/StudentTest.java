@@ -1,14 +1,11 @@
 package studentsdorm.platform;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.env.Environment;
-import org.springframework.test.context.ActiveProfiles;
 import studentsdorm.platform.Student.StudentEntity;
 import studentsdorm.platform.Student.StudentRepo;
 import studentsdorm.platform.Student.StudentService;
@@ -31,7 +28,7 @@ public class StudentTest {
 
 	@Test
 	@DisplayName("Test getStudent Success")
-	public void testGetStudentById() {
+	public void testGetStudentById() throws ExecutionException, InterruptedException {
 		List<StudentEntity> students = new ArrayList<>();
 		StudentEntity student = new StudentEntity();
 		student.setId(1L);
@@ -39,6 +36,8 @@ public class StudentTest {
 		students.add(student);
 
 		when(studentRepo.findById(1L)).thenReturn(Optional.ofNullable(students.get(0)));
+
+		Assertions.assertNull(studentService.getStudent(1L));
 
 		StudentEntity studentEntity = studentService.getStudentTest(1L);
 
