@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class StudentTest {
@@ -37,6 +39,12 @@ public class StudentTest {
 		List<Student> students = new ArrayList<>();
 		Student student = new Student();
 		student.setId(1L);
+		student.setName("Adelin");
+		student.setRoom(239L);
+		student.setPhone("+40747553042");
+		student.setEmail("narcis.adelin.miulet@gmail.com");
+		student.setAvgGrade(8.56);
+		student.setEngCert(false);
 
 		students.add(student);
 
@@ -47,6 +55,11 @@ public class StudentTest {
 		Student studentEntity = studentService.getStudentTest(1L);
 
 		Assertions.assertEquals(student, studentEntity);
+		Assertions.assertEquals(student.getRoom(), studentEntity.getRoom());
+		Assertions.assertEquals(student.getPhone(), studentEntity.getPhone());
+		Assertions.assertEquals(student.getEmail(), studentEntity.getEmail());
+		Assertions.assertEquals(student.getAvgGrade(), studentEntity.getAvgGrade());
+		Assertions.assertEquals(student.getEngCert(), studentEntity.getEngCert());
 		verify(studentRepo, times(1)).findById(1L);
 	}
 
@@ -88,7 +101,7 @@ public class StudentTest {
 	@DisplayName("Test getStudents Success")
 	public void testGetStudents() {
 		List<Student> students = new ArrayList<>();
-		Student student = new Student("Adelin", 239L);
+		Student student = new Student("Adelin", 239L, "+40747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
 
 		students.add(student);
 

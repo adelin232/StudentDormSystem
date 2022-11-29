@@ -64,4 +64,9 @@ public class StudentController {
         generator.setStudentService(studentService);
         generator.generate(response);
     }
+
+    @PostMapping("/student/new")
+    public String createStudent() {
+        return "redirect:students";
+    }
 }
