@@ -37,4 +37,8 @@ public class StudentService {
     public Student getStudentByRoom(final Long room) {
         return studentRepo.findByRoom(room);
     }
+
+    public void createStudent(final Student student) {
+        studentRepo.save(student);
+    }
 }

@@ -40,7 +40,7 @@ public class Student extends StudentAbstract {
         return name;
     }
 
-    @Column(name = "room")
+    @Column(name = "room", columnDefinition = "bigint default 0")
     public Long getRoom() {
         return room;
     }
@@ -56,12 +56,12 @@ public class Student extends StudentAbstract {
         return email;
     }
 
-    @Column(name = "avg_grade")
+    @Column(name = "avg_grade", columnDefinition = "double default 1.0")
     public Double getAvgGrade() {
         return avgGrade;
     }
 
-    @Column(name = "eng_cert")
+    @Column(name = "eng_cert", columnDefinition = "bit default false")
     public Boolean getEngCert() {
         return engCert;
     }

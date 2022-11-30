@@ -4,10 +4,7 @@ import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import studentsdorm.platform.PDFGenerator;
 
 import javax.servlet.http.HttpServletResponse;
@@ -65,8 +62,18 @@ public class StudentController {
         generator.generate(response);
     }
 
-    @PostMapping("/student/new")
-    public String createStudent() {
-        return "redirect:students";
+    @GetMapping("/students/new")
+    public String createStudent(Model model) {
+        model.addAttribute("studentForm", new Student());
+
+        return "new_student";
+    }
+
+    @PostMapping("/students/new")
+    public String createStudent(Model model, @ModelAttribute("studentForm") Student studentForm) {
+        studentService.createStudent(studentForm);
+        model.addAttribute("studentForm", studentForm);
+
+        return "new_student";
     }
 }
