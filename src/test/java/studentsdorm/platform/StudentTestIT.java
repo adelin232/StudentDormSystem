@@ -1,6 +1,7 @@
 package studentsdorm.platform;
 
 import com.google.gson.Gson;
+import org.apache.catalina.connector.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -10,11 +11,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.util.ContentCachingResponseWrapper;
 import studentsdorm.platform.Student.Student;
 import studentsdorm.platform.Student.StudentController;
 import studentsdorm.platform.Student.StudentService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,6 +58,28 @@ public class StudentTestIT {
         Mockito.when(studentService.getStudents()).thenReturn(students);
         mvc.perform(MockMvcRequestBuilders
                         .get("/students")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Test GET PDF methods")
+    public void testGetPdf() throws Exception {
+        Response newResponse = new Response(256);
+        newResponse.setCoyoteResponse(new org.apache.coyote.Response());
+        HttpServletResponse response = new ContentCachingResponseWrapper(newResponse);
+        response.setContentType("application/pdf");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
+        String currentDateTime = dateFormat.format(new Date());
+        String headerkey = "Content-Disposition";
+        String headervalue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        response.setHeader(headerkey, headervalue);
+
+        PDFGenerator generator = new PDFGenerator();
+        generator.setStudentService(studentService);
+
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/pdf/students")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
