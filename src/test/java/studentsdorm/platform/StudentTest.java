@@ -102,6 +102,7 @@ public class StudentTest {
 	public void testGetStudents() {
 		List<Student> students = new ArrayList<>();
 		Student student = new Student("Adelin", 239L, "+40747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
+		studentService.createStudent(student); // just for Coverage (createStudent)
 
 		students.add(student);
 
