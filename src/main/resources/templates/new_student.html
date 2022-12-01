@@ -10,6 +10,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/monokai-sublime.min.css"/>
 </head>
+<script>
+    function clearParagraphs() {
+        document.getElementById("studentName+").innerHTML = "";
+        document.getElementById("studentRoom+").innerHTML = "";
+        document.getElementById("studentPhone+").innerHTML = "";
+        document.getElementById("studentEmail+").innerHTML = "";
+        document.getElementById("studentAvgGrade+").innerHTML = "";
+        document.getElementById("studentEngCert+").innerHTML = "";
+    }
+</script>
 <style>
     background {
         position: center;
@@ -40,14 +50,46 @@
 <body>
     <div class="background">
         <div class="content">
-            <div class="col-6 mt-3" style="margin: auto; text-align: center">
+            <div class="col-6 mt-3" style="margin: auto; text-align: left">
                 <form method="post" class="form-signin" th:object="${studentForm}" th:action="@{/students/new}">
-<!--                    <input class="btn btn-primary" type="submit" value="Get Students" style="margin-top:350px; width: 150px; font-weight: bold" th:action="@{/students}"/>-->
                     <div class="form-group">
                         <label for="studentName+">Name</label>
                         <input type="text" th:field="*{name}" class="form-control" id="studentName+"
                                th:placeholder="*{name}" autofocus="true" required>
                     </div>
+                    <div class="form-group">
+                        <label for="studentRoom+">Room</label>
+                        <input type="text" th:field="*{room}" class="form-control" id="studentRoom+"
+                               th:placeholder="*{room}" autofocus="true" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentPhone+">Phone</label>
+                        <input type="text" th:field="*{phone}" class="form-control" id="studentPhone+"
+                               th:placeholder="*{phone}" autofocus="true" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentEmail+">E-mail</label>
+                        <input type="text" th:field="*{email}" class="form-control" id="studentEmail+"
+                               th:placeholder="*{email}" autofocus="true" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentAvgGrade+">Average Grade</label>
+                        <input type="text" th:field="*{avgGrade}" class="form-control" id="studentAvgGrade+"
+                               th:placeholder="*{avgGrade}" autofocus="true" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentEngCert+">English Certificate</label>
+                        <input type="text" th:field="*{engCert}" class="form-control" id="studentEngCert+"
+                               th:placeholder="*{engCert}" autofocus="true" required>
+                    </div>
+                    <button type="reset" class="btn btn-primary" onclick="submitForm()">Add Student</button>
+                    <script>
+                        function submitForm() {
+                            document.forms[0].submit();
+                            document.forms[0].reset();
+                            clearParagraphs();
+                        }
+                    </script>
                 </form>
             </div>
         </div>

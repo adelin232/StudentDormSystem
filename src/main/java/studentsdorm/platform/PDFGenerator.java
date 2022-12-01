@@ -24,9 +24,8 @@ public class PDFGenerator {
     private StudentService studentService;
 
     public void generate(HttpServletResponse response) throws DocumentException, IOException {
-
         // Creating the Object of Document
-        Document document = new Document(PageSize.A4);
+        Document document = new Document(PageSize.A4.rotate());
 
         // Getting instance of PdfWriter
         PdfWriter.getInstance(document, response.getOutputStream());
@@ -40,7 +39,7 @@ public class PDFGenerator {
         fontTitle.setSize(20);
 
         // Creating paragraph
-        Paragraph paragraph = new Paragraph("Students", fontTitle);
+        Paragraph paragraph = new Paragraph("Studenti", fontTitle);
 
         // Aligning the paragraph in document
         paragraph.setAlignment(Paragraph.ALIGN_CENTER);
@@ -50,12 +49,12 @@ public class PDFGenerator {
 
         document.add(new Paragraph("\n"));
 
-        // Creating a table of 3 columns
-        PdfPTable table = new PdfPTable(3);
+        // Creating a table of 7 columns
+        PdfPTable table = new PdfPTable(7);
 
         // Setting width of table, its columns and spacing
         table.setWidthPercentage(100f);
-        table.setWidths(new int[] { 2, 3, 3 });
+        table.setWidths(new int[] { 1, 3, 2, 3, 4, 2, 2 });
         table.setSpacingBefore(5);
 
         // Create Table Cells for table header
@@ -78,12 +77,24 @@ public class PDFGenerator {
         table.addCell(cell);
         cell.setPhrase(new Phrase("Camera", font));
         table.addCell(cell);
+        cell.setPhrase(new Phrase("Telefon", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("E-mail", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Medie Generala", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Certificat Engleza", font));
+        table.addCell(cell);
 
         // Iterating over the list of students
         for (Student student : studentService.getStudents()) {
             table.addCell(String.valueOf(student.getId()));
             table.addCell(student.getName());
             table.addCell(String.valueOf(student.getRoom()));
+            table.addCell(student.getPhone());
+            table.addCell(student.getEmail());
+            table.addCell(String.valueOf(student.getAvgGrade()));
+            table.addCell(String.valueOf(student.getEngCert()).equals("true") ? "DA" : "NU");
         }
         // Adding the created table to document
         document.add(table);
