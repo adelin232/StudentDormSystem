@@ -28,11 +28,25 @@ public class StudentTestIT {
     @MockBean
     StudentService studentService;
 
+    Student student = new Student("Adelin", 239L, "+40747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
+
     @Test
-    @DisplayName("Test Controller methods")
-    public void testControllerMethods() throws Exception {
+    @DisplayName("Test GET Student methods")
+    public void testGetStudent() throws Exception {
+        Student newStudent = new Student();
+        student.setId(1L);
+
+        Mockito.when(studentService.getStudent(1L)).thenReturn(newStudent);
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/students/new")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Test GET Students methods")
+    public void testGetStudents() throws Exception {
         List<Student> students = new ArrayList<>();
-        Student student = new Student("Adelin", 239L, "+40747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
         students.add(student);
 
         Mockito.when(studentService.getStudents()).thenReturn(students);
@@ -40,17 +54,32 @@ public class StudentTestIT {
                         .get("/students")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
 
-        String url = "/students" + "/new";
+    @Test
+    @DisplayName("Test POST Student methods")
+    public void testPostStudent() throws Exception {
+        String url2 = "/students" + "/new";
 
         Gson gson = new Gson();
         String json = gson.toJson(student);
 
         mvc.perform(MockMvcRequestBuilders
-                        .post(url)
+                        .post(url2)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    @DisplayName("Test POST Students methods")
+    public void testPostStudents() throws Exception {
+        String url1 = "/students";
+
+        mvc.perform(MockMvcRequestBuilders
+                        .post(url1))
+                .andExpect(status().is3xxRedirection())
                 .andReturn();
     }
 }
