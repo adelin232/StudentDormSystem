@@ -22,12 +22,6 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/students/{id}")
-    @ResponseBody
-    public String getStudent(@PathVariable final Long id) throws ExecutionException, InterruptedException {
-        return studentService.getStudent(id).getName();
-    }
-
     @GetMapping("/students")
     @Transactional
     public String getStudents(Model model) {
