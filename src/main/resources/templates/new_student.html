@@ -82,13 +82,13 @@
                         <input type="text" th:field="*{engCert}" class="form-control" id="studentEngCert+"
                                th:placeholder="*{engCert}" autofocus="true" required>
                     </div>
-                    <button type="reset" class="btn btn-primary" style="font-weight: bold" onclick="submitForm()">Add Student</button>
+                    <button type="submit" class="btn btn-primary" style="font-weight: bold">Add Student</button>
                     <input class="btn btn-secondary" type="submit" value="Back" style="font-weight: bold" onclick="location.href='../students'"/>
                     <script>
                         function submitForm() {
-                            document.forms[1].submit();
-                            document.forms[1].reset();
-                            clearParagraphs();
+                            // document.forms[1].submit();
+                            // document.forms[1].reset();
+                            // clearParagraphs();
                         }
                     </script>
                 </form>
