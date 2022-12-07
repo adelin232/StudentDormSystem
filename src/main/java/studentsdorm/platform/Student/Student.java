@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.Valid;
 
 @Setter
 @Component
@@ -46,7 +45,6 @@ public class Student extends StudentAbstract {
     }
 
     @Column(name = "phone")
-    @Valid
     public String getPhone() {
         return phone;
     }

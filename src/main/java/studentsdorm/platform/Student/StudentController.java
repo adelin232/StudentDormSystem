@@ -20,6 +20,8 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+    private Boolean wrongEmail = Boolean.FALSE;
+    private Boolean wrongPhone = Boolean.FALSE;
 
     @GetMapping("/students")
     @Transactional
@@ -42,6 +44,7 @@ public class StudentController {
     }
 
     @GetMapping("/pdf/students")
+    @Transactional
     public void generateReportPdf(HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss");
@@ -55,15 +58,37 @@ public class StudentController {
         generator.generate(response);
     }
 
-    @GetMapping("/students/new")
+    @GetMapping("/new_student")
+    @Transactional
     public String createStudent(Model model) {
+        if (wrongEmail) {
+            model.addAttribute("wrongEmail", new Object());
+            wrongEmail = false;
+        }
+
+        if (wrongPhone) {
+            model.addAttribute("wrongPhone", new Object());
+            wrongPhone = false;
+        }
+
         model.addAttribute("studentForm", new Student());
 
         return "new_student";
     }
 
-    @PostMapping("/students/new")
+    @PostMapping("/new_student")
+    @Transactional
     public String createStudent(Model model, @ModelAttribute("studentForm") Student studentForm) {
+        if (!studentService.isEmailCorrect(studentForm.getEmail())) {
+            wrongEmail = true;
+            return "redirect:new_student";
+        }
+
+        if (!studentService.isPhoneCorrect(studentForm.getPhone())) {
+            wrongPhone = true;
+            return "redirect:new_student";
+        }
+
         studentService.createStudent(studentForm);
         model.addAttribute("studentForm", studentForm);
 

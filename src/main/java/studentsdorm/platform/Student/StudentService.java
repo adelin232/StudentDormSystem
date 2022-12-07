@@ -7,12 +7,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.regex.Pattern;
 
 @Service
 public class StudentService {
 
     @Autowired
     private StudentRepo studentRepo;
+
+    private final static String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+            + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+    private final static String PHONE_PATTERN = "^\\d{10}$";
 
     public Student getStudent(final Long id) throws ExecutionException, InterruptedException {
         CompletableFuture<List<Student>> future = CompletableFuture.supplyAsync(this::getStudents);
@@ -40,5 +46,17 @@ public class StudentService {
 
     public void createStudent(final Student student) {
         studentRepo.save(student);
+    }
+
+    public boolean isEmailCorrect(String email) {
+        return Pattern.compile(EMAIL_PATTERN)
+                .matcher(email)
+                .matches();
+    }
+
+    public boolean isPhoneCorrect(String phone) {
+        return Pattern.compile(PHONE_PATTERN)
+                .matcher(phone)
+                .matches();
     }
 }
