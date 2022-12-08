@@ -10,16 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/monokai-sublime.min.css"/>
 </head>
-<script>
-    function clearParagraphs() {
-        document.getElementById("name").value = "";
-        document.getElementById("studentRoom+").innerHTML = "";
-        document.getElementById("studentPhone+").innerHTML = "";
-        document.getElementById("studentEmail+").innerHTML = "";
-        document.getElementById("studentAvgGrade+").innerHTML = "";
-        document.getElementById("studentEngCert+").innerHTML = "";
-    }
-</script>
 <style>
     background {
         position: center;
@@ -101,7 +91,6 @@
                         function submitForm() {
                             document.forms[0].submit();
                             document.forms[0].reset();
-                            clearParagraphs();
                         }
                     </script>
                 </form>

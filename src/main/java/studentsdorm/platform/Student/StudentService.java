@@ -46,6 +46,7 @@ public class StudentService {
         return studentRepo.findByRoom(room);
     }
 
+    @Log
     public void createStudent(final Student student) {
         studentRepo.save(student);
     }

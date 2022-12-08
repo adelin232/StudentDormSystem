@@ -16,13 +16,6 @@ import java.util.Arrays;
 @Component
 public class LoggingAspect {
 
-    @Around("execution(* studentsdorm.platform.Student.StudentService.createStudent(..))")
-    public void logAroundCreateStudent(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("****LoggingAspect.logAroundCreateStudent() : " + joinPoint.getSignature().getName() + ": Before Method Execution");
-        joinPoint.proceed();
-        System.out.println("****LoggingAspect.logAroundCreateStudent() : " + joinPoint.getSignature().getName() + ": After Method Execution");
-    }
-
     @Around("@annotation(studentsdorm.platform.Log)")
     public Object log(ProceedingJoinPoint thisJoinPoint) throws Throwable {
         String methodName = thisJoinPoint.getSignature().getName();
@@ -51,26 +44,6 @@ public class LoggingAspect {
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
         log.error("Exception in {}.{}() with cause = {}", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), e.getCause() != null ? e.getCause() : "NULL");
-    }
-
-    @Around("applicationPackagePointcut() && springBeanPointcut()")
-    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        if (log.isDebugEnabled()) {
-            log.debug("Enter: {}.{}() with argument[s] = {}", joinPoint.getSignature().getDeclaringTypeName(),
-                    joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
-        }
-        try {
-            Object result = joinPoint.proceed();
-            if (log.isDebugEnabled()) {
-                log.debug("Exit: {}.{}() with result = {}", joinPoint.getSignature().getDeclaringTypeName(),
-                        joinPoint.getSignature().getName(), result);
-            }
-            return result;
-        } catch (IllegalArgumentException e) {
-            log.error("Illegal argument: {} in {}.{}()", Arrays.toString(joinPoint.getArgs()),
-                    joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
-            throw e;
-        }
     }
 }
 

@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class StudentController {
@@ -25,21 +24,13 @@ public class StudentController {
 
     @GetMapping("/students")
     @Transactional
-    public String getStudents(Model model) {
-//        List<Student> students = studentService.getStudents();
-//
-//        model.addAttribute("allStudentsForm", students);
-
+    public String getStudents() {
         return "students";
     }
 
     @PostMapping("/students")
     @Transactional
-    public String getStudentss(Model model) {
-//        List<Student> students = studentService.getStudents();
-//
-//        model.addAttribute("allStudentsForm", students);
-
+    public String getStudentss() {
         return "redirect:pdf/students";
     }
 
