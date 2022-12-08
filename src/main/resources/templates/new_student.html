@@ -12,7 +12,7 @@
 </head>
 <script>
     function clearParagraphs() {
-        document.getElementById("studentName+").innerHTML = "";
+        document.getElementById("name").value = "";
         document.getElementById("studentRoom+").innerHTML = "";
         document.getElementById("studentPhone+").innerHTML = "";
         document.getElementById("studentEmail+").innerHTML = "";
@@ -46,6 +46,13 @@
     body {
         margin-bottom: 0;
     }
+    a.button {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+
+        text-decoration: none;
+        color: initial;
+    }
 </style>
 <body>
     <div class="background">
@@ -61,40 +68,40 @@
                     <div class="form-group">
                         <label for="studentName+">Name</label>
                         <input type="text" th:field="*{name}" class="form-control" id="studentName+"
-                               th:placeholder="*{name}" autofocus="true" required>
+                               autofocus="true" required>
                     </div>
                     <div class="form-group">
                         <label for="studentRoom+">Room</label>
                         <input type="text" th:field="*{room}" class="form-control" id="studentRoom+"
-                               th:placeholder="*{room}" autofocus="true" required>
+                               autofocus="true" required>
                     </div>
                     <div class="form-group">
                         <label for="studentPhone+">Phone</label>
                         <input type="text" th:field="*{phone}" class="form-control" id="studentPhone+"
-                               th:placeholder="*{phone}" autofocus="true" required>
+                               autofocus="true" required>
                     </div>
                     <div class="form-group">
                         <label for="studentEmail+">E-mail</label>
                         <input type="text" th:field="*{email}" class="form-control" id="studentEmail+"
-                               th:placeholder="*{email}" autofocus="true" required>
+                               autofocus="true" required>
                     </div>
                     <div class="form-group">
                         <label for="studentAvgGrade+">Average Grade</label>
                         <input type="text" th:field="*{avgGrade}" class="form-control" id="studentAvgGrade+"
-                               th:placeholder="*{avgGrade}" autofocus="true" required>
+                               autofocus="true" required>
                     </div>
                     <div class="form-group">
                         <label for="studentEngCert+">English Certificate</label>
                         <input type="text" th:field="*{engCert}" class="form-control" id="studentEngCert+"
-                               th:placeholder="*{engCert}" autofocus="true" required>
+                               autofocus="true" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="font-weight: bold">Add Student</button>
-                    <input class="btn btn-secondary" type="submit" value="Back" style="font-weight: bold" onclick="location.href='../students'"/>
+                    <button type="reset" class="btn btn-primary" style="font-weight: bold" onclick="submitForm()">Add Student</button>
+                    <a href="http://localhost:8080/students" class="button btn btn-secondary" style="color: white; font-weight: bold">Back</a>
                     <script>
                         function submitForm() {
-                            // document.forms[1].submit();
-                            // document.forms[1].reset();
-                            // clearParagraphs();
+                            document.forms[0].submit();
+                            document.forms[0].reset();
+                            clearParagraphs();
                         }
                     </script>
                 </form>
