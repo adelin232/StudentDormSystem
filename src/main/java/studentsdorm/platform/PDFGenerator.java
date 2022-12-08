@@ -73,17 +73,17 @@ public class PDFGenerator {
         // Adding Cell to table
         cell.setPhrase(new Phrase("ID", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Nume", font));
+        cell.setPhrase(new Phrase("Name", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Camera", font));
+        cell.setPhrase(new Phrase("Room", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Telefon", font));
+        cell.setPhrase(new Phrase("Phone", font));
         table.addCell(cell);
         cell.setPhrase(new Phrase("E-mail", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Medie Generala", font));
+        cell.setPhrase(new Phrase("Average Grade", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Certificat Engleza", font));
+        cell.setPhrase(new Phrase("English Certificate", font));
         table.addCell(cell);
 
         // Iterating over the list of students
