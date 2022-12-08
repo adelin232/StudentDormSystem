@@ -44,7 +44,7 @@ public class StudentTestIT {
 
         Mockito.when(studentService.getStudent(1L)).thenReturn(newStudent);
         mvc.perform(MockMvcRequestBuilders
-                        .get("/students/new")
+                        .get("/new_student")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -76,7 +76,7 @@ public class StudentTestIT {
         response.setHeader(headerkey, headervalue);
 
         PDFGenerator generator = new PDFGenerator();
-        generator.setStudentService(studentService);
+        generator.setStudents(studentService.getStudents());
 
         mvc.perform(MockMvcRequestBuilders
                         .get("/pdf/students")
@@ -87,7 +87,7 @@ public class StudentTestIT {
     @Test
     @DisplayName("Test POST Student methods")
     public void testPostStudent() throws Exception {
-        String url2 = "/students" + "/new";
+        String url2 = "/new_student";
 
         Gson gson = new Gson();
         String json = gson.toJson(student);
@@ -96,7 +96,7 @@ public class StudentTestIT {
                         .post(url2)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
-                .andExpect(status().isOk())
+                .andExpect(status().is3xxRedirection())
                 .andReturn();
     }
 
