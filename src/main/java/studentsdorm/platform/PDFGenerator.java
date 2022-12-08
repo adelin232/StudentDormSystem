@@ -94,7 +94,7 @@ public class PDFGenerator {
             table.addCell(student.getPhone());
             table.addCell(student.getEmail());
             table.addCell(String.valueOf(student.getAvgGrade()));
-            table.addCell(String.valueOf(student.getEngCert()).equals("true") ? "DA" : "NU");
+            table.addCell(String.valueOf(student.getEngCert()).equals("true") ? "Yes" : "No");
         }
         // Adding the created table to document
         document.add(table);
