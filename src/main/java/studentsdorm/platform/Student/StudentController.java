@@ -26,9 +26,9 @@ public class StudentController {
     @GetMapping("/students")
     @Transactional
     public String getStudents(Model model) {
-        List<Student> students = studentService.getStudents();
-
-        model.addAttribute("allStudentsForm", students);
+//        List<Student> students = studentService.getStudents();
+//
+//        model.addAttribute("allStudentsForm", students);
 
         return "students";
     }
@@ -36,9 +36,9 @@ public class StudentController {
     @PostMapping("/students")
     @Transactional
     public String getStudentss(Model model) {
-        List<Student> students = studentService.getStudents();
-
-        model.addAttribute("allStudentsForm", students);
+//        List<Student> students = studentService.getStudents();
+//
+//        model.addAttribute("allStudentsForm", students);
 
         return "redirect:pdf/students";
     }
@@ -54,7 +54,7 @@ public class StudentController {
         response.setHeader(headerkey, headervalue);
 
         PDFGenerator generator = new PDFGenerator();
-        generator.setStudentService(studentService);
+        generator.setStudents(studentService.getStudents());
         generator.generate(response);
     }
 

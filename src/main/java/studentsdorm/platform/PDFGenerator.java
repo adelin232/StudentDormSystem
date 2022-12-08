@@ -13,15 +13,15 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.Setter;
 import studentsdorm.platform.Student.Student;
-import studentsdorm.platform.Student.StudentService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @Setter
 public class PDFGenerator {
 
-    private StudentService studentService;
+    private List<Student> students;
 
     public void generate(HttpServletResponse response) throws DocumentException, IOException {
         // Creating the Object of Document
@@ -87,7 +87,7 @@ public class PDFGenerator {
         table.addCell(cell);
 
         // Iterating over the list of students
-        for (Student student : studentService.getStudents()) {
+        for (Student student : students) {
             table.addCell(String.valueOf(student.getId()));
             table.addCell(student.getName());
             table.addCell(String.valueOf(student.getRoom()));
