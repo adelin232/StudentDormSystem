@@ -2,6 +2,7 @@ package studentsdorm.platform.Student;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import studentsdorm.platform.Log;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +33,7 @@ public class StudentService {
         return studentRepo.findById(id).orElseThrow();
     }
 
+    @Log
     public List<Student> getStudents() {
         return studentRepo.findAll();
     }

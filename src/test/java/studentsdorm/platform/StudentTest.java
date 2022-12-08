@@ -41,7 +41,7 @@ public class StudentTest {
 		student.setId(1L);
 		student.setName("Adelin");
 		student.setRoom(239L);
-		student.setPhone("+40747553042");
+		student.setPhone("0747553042");
 		student.setEmail("narcis.adelin.miulet@gmail.com");
 		student.setAvgGrade(8.56);
 		student.setEngCert(false);
@@ -101,7 +101,7 @@ public class StudentTest {
 	@DisplayName("Test getStudents Success")
 	public void testGetStudents() {
 		List<Student> students = new ArrayList<>();
-		Student student = new Student("Adelin", 239L, "+40747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
+		Student student = new Student("Adelin", 239L, "0747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
 		studentService.createStudent(student); // just for Coverage (createStudent)
 
 		students.add(student);

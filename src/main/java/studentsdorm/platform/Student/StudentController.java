@@ -36,9 +36,9 @@ public class StudentController {
     @PostMapping("/students")
     @Transactional
     public String getStudentss(Model model) {
-        List<Student> payments = studentService.getStudents();
+        List<Student> students = studentService.getStudents();
 
-        model.addAttribute("allStudentsForm", payments);
+        model.addAttribute("allStudentsForm", students);
 
         return "redirect:pdf/students";
     }

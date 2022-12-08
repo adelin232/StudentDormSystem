@@ -34,7 +34,7 @@ public class StudentTestIT {
     @MockBean
     StudentService studentService;
 
-    Student student = new Student("Adelin", 239L, "+40747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
+    Student student = new Student("Adelin", 239L, "0747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
 
     @Test
     @DisplayName("Test GET Student methods")
