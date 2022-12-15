@@ -45,57 +45,57 @@
     }
 </style>
 <body>
-    <div class="background">
-        <div class="content">
-            <div class="col-6 mt-3" style="margin: auto; text-align: left">
-                <form method="post" class="form-signin" style="font-weight: bold" th:object="${studentForm}" th:action="@{/new_student}">
-                    <div style="font-weight: bold;" th:if="${wrongEmail}" class="alert alert-danger" role="alert">
-                        Introduceti o adresa de e-mail valida
-                    </div>
-                    <div style="font-weight: bold;" th:if="${wrongPhone}" class="alert alert-danger" role="alert">
-                        Introduceti un numar corect din 10 cifre
-                    </div>
-                    <div class="form-group">
-                        <label for="studentName+">Name</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="studentName+"
-                               autofocus="true" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="studentRoom+">Room</label>
-                        <input type="text" th:field="*{room}" class="form-control" id="studentRoom+"
-                               autofocus="true" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="studentPhone+">Phone</label>
-                        <input type="text" th:field="*{phone}" class="form-control" id="studentPhone+"
-                               autofocus="true" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="studentEmail+">E-mail</label>
-                        <input type="text" th:field="*{email}" class="form-control" id="studentEmail+"
-                               autofocus="true" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="studentAvgGrade+">Average Grade</label>
-                        <input type="text" th:field="*{avgGrade}" class="form-control" id="studentAvgGrade+"
-                               autofocus="true" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="studentEngCert+">English Certificate</label>
-                        <input type="text" th:field="*{engCert}" class="form-control" id="studentEngCert+"
-                               autofocus="true" required>
-                    </div>
-                    <button type="reset" class="btn btn-primary" style="font-weight: bold" onclick="submitForm()">Add Student</button>
-                    <a href="http://localhost:8080/students" class="button btn btn-secondary" style="color: white; font-weight: bold">Back</a>
-                    <script>
-                        function submitForm() {
-                            document.forms[0].submit();
-                            document.forms[0].reset();
-                        }
-                    </script>
-                </form>
-            </div>
+<div class="background">
+    <div class="content">
+        <div class="col-6 mt-3" style="margin: auto; text-align: left">
+            <form method="post" class="form-signin" style="font-weight: bold" th:object="${studentForm}" th:action="@{/new_student}">
+                <div style="font-weight: bold;" th:if="${wrongEmail}" class="alert alert-danger" role="alert">
+                    Introduceti o adresa de e-mail valida
+                </div>
+                <div style="font-weight: bold;" th:if="${wrongPhone}" class="alert alert-danger" role="alert">
+                    Introduceti un numar corect din 10 cifre
+                </div>
+                <div class="form-group">
+                    <label for="studentName+">Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="studentName+"
+                           autofocus="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentRoom+">Room</label>
+                    <input type="text" th:field="*{room}" class="form-control" id="studentRoom+"
+                           autofocus="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentPhone+">Phone</label>
+                    <input type="text" th:field="*{phone}" class="form-control" id="studentPhone+"
+                           autofocus="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail+">E-mail</label>
+                    <input type="text" th:field="*{email}" class="form-control" id="studentEmail+"
+                           autofocus="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentAvgGrade+">Average Grade</label>
+                    <input type="text" th:field="*{avgGrade}" class="form-control" id="studentAvgGrade+"
+                           autofocus="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEngCert+">English Certificate</label>
+                    <input type="text" th:field="*{engCert}" class="form-control" id="studentEngCert+"
+                           autofocus="true" required>
+                </div>
+                <button type="reset" class="btn btn-primary" style="font-weight: bold" onclick="submitForm()">Add Student</button>
+                <a href="http://localhost:8080/students" class="button btn btn-secondary" style="color: white; font-weight: bold">Back</a>
+                <script>
+                    function submitForm() {
+                        document.forms[0].submit();
+                        document.forms[0].reset();
+                    }
+                </script>
+            </form>
         </div>
     </div>
+</div>
 </body>
 </html>
