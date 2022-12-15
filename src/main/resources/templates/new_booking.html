@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/default">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Booking</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/monokai-sublime.min.css"/>
+</head>
+<style>
+    background {
+        position: center;
+    }
+    .background::before {
+        content: "";
+        background-image: url('/images/students.jpg');
+        background-size: cover;
+        background-repeat: repeat-y;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .content {
+        position: relative;
+    }
+    html {
+        position: relative;
+        min-height: 100%;
+        padding-bottom: 0;
+    }
+    body {
+        margin-bottom: 0;
+    }
+</style>
+<body>
+<div class="background">
+    <div class="content">
+        <div class="col-6 mt-3" style="margin: auto; text-align: left">
+            <form method="post" class="form-signin" style="font-weight: bold" th:object="${bookingForm}" th:action="@{/new_booking}">
+                <div class="form-group">
+                    <label for="wmNo+">Number of Washing Machine</label>
+                    <input type="text" th:field="*{wmNo}" class="form-control" id="wmNo+"
+                           th:placeholder="*{wmNo}" autofocus="true" required>
+                </div>
+                <div class="form-group">
+                    <label for="startDate+">Start Date</label>
+                    <input type="text" th:field="*{startDate}" class="form-control" id="startDate+"
+                           th:placeholder="*{startDate}" autofocus="true" required>
+                </div>
+                <button type="reset" class="btn btn-primary" style="font-weight: bold" onclick="submitForm()">Add Booking</button>
+                <a href="http://localhost:8080/students" class="button btn btn-secondary" style="color: white; font-weight: bold">Back</a>
+                <script>
+                    function submitForm() {
+                        document.forms[0].submit();
+                        document.forms[0].reset();
+                    }
+                </script>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
