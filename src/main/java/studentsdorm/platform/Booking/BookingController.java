@@ -1,32 +1,27 @@
 package studentsdorm.platform.Booking;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
+import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api/bookings")
 public class BookingController {
 
     @Autowired
     private BookingService bookingService;
 
-    @GetMapping("/new_booking")
-    @Transactional
-    public String createBooking(Model model) {
-        model.addAttribute("bookingForm", new Booking());
-        return "new_booking";
+    @PostMapping("/create")
+    public ResponseEntity<String> createBooking(@RequestBody Booking booking) {
+        bookingService.createBooking(booking);
+        return ResponseEntity.ok("Booking created successfully");
     }
 
-    @PostMapping("/new_booking")
-    @Transactional
-    public String createBooking(Model model, @ModelAttribute("bookingForm") Booking booking) {
-        bookingService.createBooking(booking);
-        model.addAttribute("bookingForm", booking);
-        return "new_booking";
+    @GetMapping
+    public ResponseEntity<List<Booking>> readBookings(@RequestParam String userId) {
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(bookingService.readBookings(userId));
     }
 }

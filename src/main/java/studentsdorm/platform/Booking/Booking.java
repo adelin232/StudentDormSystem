@@ -12,12 +12,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-//@Table(name = "BOOKINGS", schema = "STUDENTDB")
+@Table(name = "BOOKINGS", schema = "STUDENTDB")
 public class Booking {
 
     private long id;
-    private long wmNo; // Washing Machine Number (1 or 2)
-    private String startDate;
+    private String userId;
+    private String wmNo; // Washing Machine Number (1 or 2)
+    private String startHour;
 
     @Id
     @Column(name = "id")
@@ -26,13 +27,18 @@ public class Booking {
         return id;
     }
 
+    @Column(name = "userId")
+    public String getUserId() {
+        return userId;
+    }
+
     @Column(name = "wmNo")
-    public Long getWmNo() {
+    public String getWmNo() {
         return wmNo;
     }
 
-    @Column(name = "startDate")
-    public String getStartDate() {
-        return startDate;
+    @Column(name = "startHour")
+    public String getStartHour() {
+        return startHour;
     }
 }
