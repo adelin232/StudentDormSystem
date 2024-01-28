@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class Student extends StudentAbstract {
 
     private String name;
-    private long room;
+    private String room;
     private String phone;
     private String email;
     private double avgGrade;
@@ -34,13 +34,18 @@ public class Student extends StudentAbstract {
         return id;
     }
 
+    @Column(name = "user_id", columnDefinition = "varchar(255) default 'defaultUserId'")
+    public String getUserId() {
+        return userId;
+    }
+
     @Column(name = "name", columnDefinition = "varchar(255) default 'defaultName'")
     public String getName() {
         return name;
     }
 
-    @Column(name = "room", columnDefinition = "bigint default 0")
-    public Long getRoom() {
+    @Column(name = "room", columnDefinition = "varchar(255) default 'defaultRoom'")
+    public String getRoom() {
         return room;
     }
 

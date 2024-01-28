@@ -6,6 +6,7 @@ import studentsdorm.platform.Log;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
@@ -47,9 +48,20 @@ public class StudentService {
     }
 
     @Log
-    public void createStudent(final Student student) {
-        studentRepo.save(student);
+    public void createOrUpdateStudent(final Student student) {
+        Optional<Student> existingStudent = studentRepo.findStudentByUserId(student.getUserId());
+
+        if (existingStudent.isPresent()) {
+            Student updatedStudent = existingStudent.get();
+            updatedStudent.setName(student.getName());
+            updatedStudent.setEmail(student.getEmail());
+            updatedStudent.setRoom(student.getRoom());
+            studentRepo.save(updatedStudent);
+        } else {
+            studentRepo.save(student);
+        }
     }
+
 
     public boolean isEmailCorrect(String email) {
         return Pattern.compile(EMAIL_PATTERN)

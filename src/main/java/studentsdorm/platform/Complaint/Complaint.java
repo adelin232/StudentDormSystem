@@ -1,4 +1,4 @@
-package studentsdorm.platform.Booking;
+package studentsdorm.platform.Complaint;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -17,13 +17,13 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "BOOKINGS", schema = "STUDENTDB")
-public class Booking {
+@Table(name = "COMPLAINTS", schema = "STUDENTDB")
+public class Complaint {
 
     private long id;
     private String userId;
-    private String wmNo;
-    private String startHour;
+    private String subject;
+    private String description;
 
     @Id
     @Column(name = "id")
@@ -37,13 +37,13 @@ public class Booking {
         return userId;
     }
 
-    @Column(name = "wmNo")
-    public String getWmNo() {
-        return wmNo;
+    @Column(name = "subject")
+    public String getSubject() {
+        return subject;
     }
 
-    @Column(name = "startHour")
-    public String getStartHour() {
-        return startHour;
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
     }
 }

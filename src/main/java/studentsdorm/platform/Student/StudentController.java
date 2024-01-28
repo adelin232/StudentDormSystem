@@ -2,9 +2,12 @@ package studentsdorm.platform.Student;
 
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import studentsdorm.platform.PDFGenerator;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,24 +17,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Controller
+@RestController
+@RequestMapping("/api/students")
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
-    private Boolean wrongEmail = Boolean.FALSE;
-    private Boolean wrongPhone = Boolean.FALSE;
 
-    @GetMapping("/students")
-    @Transactional
-    public String getStudents() {
-        return "students";
-    }
-
-    @PostMapping("/students")
-    @Transactional
-    public String getStudentss() {
-        return "redirect:pdf/students";
+    @PutMapping("/create")
+    public ResponseEntity<String> createBooking(@RequestBody Student student) {
+        studentService.createOrUpdateStudent(student);
+        return ResponseEntity.ok("Student created successfully");
     }
 
     @GetMapping("/pdf/students")
@@ -47,42 +43,5 @@ public class StudentController {
         PDFGenerator generator = new PDFGenerator();
         generator.setStudents(studentService.getStudents());
         generator.generate(response);
-    }
-
-    @GetMapping("/new_student")
-    @Transactional
-    public String createStudent(Model model) {
-        if (wrongEmail) {
-            model.addAttribute("wrongEmail", new Object());
-            wrongEmail = false;
-        }
-
-        if (wrongPhone) {
-            model.addAttribute("wrongPhone", new Object());
-            wrongPhone = false;
-        }
-
-        model.addAttribute("studentForm", new Student());
-
-        return "new_student";
-    }
-
-    @PostMapping("/new_student")
-    @Transactional
-    public String createStudent(Model model, @ModelAttribute("studentForm") Student studentForm) {
-        if (!studentService.isEmailCorrect(studentForm.getEmail())) {
-            wrongEmail = true;
-            return "redirect:new_student";
-        }
-
-        if (!studentService.isPhoneCorrect(studentForm.getPhone())) {
-            wrongPhone = true;
-            return "redirect:new_student";
-        }
-
-        studentService.createStudent(studentForm);
-        model.addAttribute("studentForm", studentForm);
-
-        return "new_student";
     }
 }

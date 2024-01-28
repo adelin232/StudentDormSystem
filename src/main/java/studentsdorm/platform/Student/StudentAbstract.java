@@ -9,4 +9,5 @@ import javax.persistence.MappedSuperclass;
 public abstract class StudentAbstract {
 
     protected Long id;
+    protected String userId;
 }
