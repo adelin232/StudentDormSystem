@@ -20,8 +20,8 @@ public class ComplaintController {
         return ResponseEntity.ok("Complaint created successfully");
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<Complaint>> readBookings(@RequestParam String userId) {
-//        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(complaintService.readBookings(userId));
-//    }
+    @GetMapping
+    public ResponseEntity<List<Complaint>> readComplaints() {
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(complaintService.readComplaints());
+    }
 }

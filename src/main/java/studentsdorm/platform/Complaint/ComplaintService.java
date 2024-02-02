@@ -15,8 +15,8 @@ public class ComplaintService {
         complaintRepo.save(complaint);
     }
 
-//    public List<Complaint> readBookings(final String userId) {
-//        System.out.println(complaintRepo.findAllByUserId(userId));
-//        return complaintRepo.findAllByUserId(userId);
-//    }
+    public List<Complaint> readComplaints() {
+        System.out.println(complaintRepo.findAll());
+        return complaintRepo.findAll();
+    }
 }

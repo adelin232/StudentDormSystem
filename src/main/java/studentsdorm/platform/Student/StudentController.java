@@ -2,6 +2,7 @@ package studentsdorm.platform.Student;
 
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
@@ -28,6 +30,11 @@ public class StudentController {
     public ResponseEntity<String> createBooking(@RequestBody Student student) {
         studentService.createOrUpdateStudent(student);
         return ResponseEntity.ok("Student created successfully");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Student>> readStudents() {
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(studentService.getStudents());
     }
 
     @GetMapping("/pdf/students")

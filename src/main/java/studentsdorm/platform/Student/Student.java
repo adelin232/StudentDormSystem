@@ -24,8 +24,6 @@ public class Student extends StudentAbstract {
     private String room;
     private String phone;
     private String email;
-    private double avgGrade;
-    private boolean engCert;
 
     @Id
     @Column(name = "id")
@@ -57,15 +55,5 @@ public class Student extends StudentAbstract {
     @Column(name = "email")
     public String getEmail() {
         return email;
-    }
-
-    @Column(name = "avg_grade", columnDefinition = "double default 1.0")
-    public Double getAvgGrade() {
-        return avgGrade;
-    }
-
-    @Column(name = "eng_cert", columnDefinition = "bit default false")
-    public Boolean getEngCert() {
-        return engCert;
     }
 }
