@@ -22,7 +22,7 @@ public class Booking {
 
     private long id;
     private String userId;
-    private String wmNo;
+    private String wmNo; // Washing Machine Number
     private String startHour;
 
     @Id
