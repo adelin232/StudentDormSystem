@@ -6,21 +6,20 @@ import studentsdorm.system.Log;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.regex.Pattern;
+//import java.util.regex.Pattern;
 
 @Service
 public class StudentService {
 
     @Autowired
-    private StudentRepo studentRepo;
+    private StudentRepository studentRepository;
 
-    private final static String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
-            + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-
-    private final static String PHONE_PATTERN = "^\\d{10}$";
+//    private final static String EMAIL_PATTERN = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+//            + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+//
+//    private final static String PHONE_PATTERN = "^\\d{10}$";
 
     public Student getStudent(final Long id) throws ExecutionException, InterruptedException {
         CompletableFuture<List<Student>> future = CompletableFuture.supplyAsync(this::getStudents);
@@ -31,47 +30,49 @@ public class StudentService {
     }
 
     public Student getStudentTest(final Long id) {
-        return studentRepo.findById(id).orElseThrow();
+        return studentRepository.findById(id).orElseThrow();
     }
 
     @Log
     public List<Student> getStudents() {
-        return studentRepo.findAll();
+        return studentRepository.findAll();
+    }
+
+    public Student getStudentByUserId(final String userId) {
+        return studentRepository.findByUserId(userId);
     }
 
     public Student getStudentByName(final String name) {
-        return studentRepo.findByName(name);
+        return studentRepository.findByName(name);
     }
 
-    public Student getStudentByRoom(final Long room) {
-        return studentRepo.findByRoom(room);
+    public Student getStudentByRoom(final String room) {
+        return studentRepository.findByRoom(room);
     }
 
     @Log
     public void createOrUpdateStudent(final Student student) {
-        Optional<Student> existingStudent = studentRepo.findStudentByUserId(student.getUserId());
+        Student existingStudent = studentRepository.findByUserId(student.getUserId());
 
-        if (existingStudent.isPresent()) {
-            Student updatedStudent = existingStudent.get();
-            updatedStudent.setName(student.getName());
-            updatedStudent.setEmail(student.getEmail());
-            updatedStudent.setRoom(student.getRoom());
-            studentRepo.save(updatedStudent);
+        if (existingStudent != null) {
+            existingStudent.setName(student.getName());
+            existingStudent.setEmail(student.getEmail());
+            existingStudent.setRoom(student.getRoom());
+            studentRepository.save(existingStudent);
         } else {
-            studentRepo.save(student);
+            studentRepository.save(student);
         }
     }
 
-
-    public boolean isEmailCorrect(String email) {
-        return Pattern.compile(EMAIL_PATTERN)
-                .matcher(email)
-                .matches();
-    }
-
-    public boolean isPhoneCorrect(String phone) {
-        return Pattern.compile(PHONE_PATTERN)
-                .matcher(phone)
-                .matches();
-    }
+//    public boolean isEmailCorrect(String email) {
+//        return Pattern.compile(EMAIL_PATTERN)
+//                .matcher(email)
+//                .matches();
+//    }
+//
+//    public boolean isPhoneCorrect(String phone) {
+//        return Pattern.compile(PHONE_PATTERN)
+//                .matcher(phone)
+//                .matches();
+//    }
 }

@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import studentsdorm.system.Student.Student;
-import studentsdorm.system.Student.StudentRepo;
+import studentsdorm.system.Student.StudentRepository;
 import studentsdorm.system.Student.StudentService;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class StudentTest {
 	StudentService studentService;
 
 	@Mock
-	StudentRepo studentRepo;
+    StudentRepository studentRepository;
 
 	@Test
 	public void main() {
@@ -48,7 +48,7 @@ public class StudentTest {
 
 		students.add(student);
 
-		when(studentRepo.findById(1L)).thenReturn(Optional.ofNullable(students.get(0)));
+		when(studentRepository.findById(1L)).thenReturn(Optional.ofNullable(students.get(0)));
 
 		Assertions.assertNull(studentService.getStudent(1L));
 
@@ -60,7 +60,7 @@ public class StudentTest {
 		Assertions.assertEquals(student.getEmail(), studentEntity.getEmail());
 //		Assertions.assertEquals(student.getAvgGrade(), studentEntity.getAvgGrade());
 //		Assertions.assertEquals(student.getEngCert(), studentEntity.getEngCert());
-		verify(studentRepo, times(1)).findById(1L);
+		verify(studentRepository, times(1)).findById(1L);
 	}
 
 	@Test
@@ -72,12 +72,12 @@ public class StudentTest {
 		student.setName("Adelin");
 		students.add(student);
 
-		when(studentRepo.findByName("Adelin")).thenReturn(students.get(0));
+		when(studentRepository.findByName("Adelin")).thenReturn(students.get(0));
 
 		Student studentEntity = studentService.getStudentByName("Adelin");
 
 		Assertions.assertEquals(student.getName(), studentEntity.getName());
-		verify(studentRepo, times(1)).findByName("Adelin");
+		verify(studentRepository, times(1)).findByName("Adelin");
 	}
 
 	@Test
@@ -89,12 +89,12 @@ public class StudentTest {
 //		student.setRoom(239L);
 		students.add(student);
 
-		when(studentRepo.findByRoom(239L)).thenReturn(students.get(0));
+		when(studentRepository.findByRoom("239")).thenReturn(students.get(0));
 
-		Student studentEntity = studentService.getStudentByRoom(239L);
+		Student studentEntity = studentService.getStudentByRoom("239");
 
 		Assertions.assertEquals(student.getRoom(), studentEntity.getRoom());
-		verify(studentRepo, times(1)).findByRoom(239L);
+		verify(studentRepository, times(1)).findByRoom("239");
 	}
 
 	@Test
@@ -107,11 +107,11 @@ public class StudentTest {
 
 		students.add(student);
 
-		when(studentRepo.findAll()).thenReturn(students);
+		when(studentRepository.findAll()).thenReturn(students);
 
 		List<Student> studentList = studentService.getStudents();
 
 		Assertions.assertEquals(1, studentList.size());
-		verify(studentRepo, times(1)).findAll();
+		verify(studentRepository, times(1)).findAll();
 	}
 }

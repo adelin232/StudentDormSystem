@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/bookings")
@@ -14,10 +15,27 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @GetMapping("/available-hours")
+    public List<Map<String, Object>> getAvailableHours(@RequestParam String wmNo) {
+        return bookingService.getAvailableHours(wmNo);
+    }
+
     @PostMapping("/create")
-    public ResponseEntity<String> createBooking(@RequestBody Booking booking) {
-        bookingService.createBooking(booking);
-        return ResponseEntity.ok("Booking created successfully");
+    public ResponseEntity<Booking> createBooking(@RequestBody Map<String, String> request) {
+        String userId = request.get("userId");
+        String wmNo = request.get("wmNo");
+        String startHour = request.get("startHour");
+        Booking newBooking = bookingService.createBooking(userId, wmNo, startHour);
+        if (newBooking != null) {
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(newBooking);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/expired")
+    public void deleteExpiredBookings() {
+        bookingService.deleteExpiredBookings();
     }
 
     @GetMapping

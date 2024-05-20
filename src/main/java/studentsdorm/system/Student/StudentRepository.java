@@ -4,15 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface StudentRepo extends JpaRepository<Student, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Student findByName(final String name);
 
     @Query("SELECT s FROM Student s WHERE s.room = ?1")
-    Student findByRoom(final Long room);
+    Student findByRoom(final String room);
 
-    Optional<Student> findStudentByUserId(final String userId);
+    @Query("SELECT s FROM Student s WHERE s.userId = ?1")
+    Student findByUserId(final String userId);
 }
