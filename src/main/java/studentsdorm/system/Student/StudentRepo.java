@@ -1,4 +1,4 @@
-package studentsdorm.platform.Student;
+package studentsdorm.system.Student;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package studentsdorm.platform.Complaint;
+package studentsdorm.system.Complaint;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

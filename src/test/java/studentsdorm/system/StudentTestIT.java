@@ -1,4 +1,4 @@
-package studentsdorm.platform;
+package studentsdorm.system;
 
 import com.google.gson.Gson;
 import org.apache.catalina.connector.Response;
@@ -12,9 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.util.ContentCachingResponseWrapper;
-import studentsdorm.platform.Student.Student;
-import studentsdorm.platform.Student.StudentController;
-import studentsdorm.platform.Student.StudentService;
+import studentsdorm.system.Student.Student;
+import studentsdorm.system.Student.StudentController;
+import studentsdorm.system.Student.StudentService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
@@ -34,7 +34,8 @@ public class StudentTestIT {
     @MockBean
     StudentService studentService;
 
-    Student student = new Student("Adelin", 239L, "0747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
+//    Student student = new Student("Adelin", 239L, "0747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
+    Student student = new Student("Adelin", "239", "0747553042", "narcis.adelin.miulet@gmail.com");
 
     @Test
     @DisplayName("Test GET Student methods")

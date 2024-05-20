@@ -1,4 +1,4 @@
-package studentsdorm.platform.Student;
+package studentsdorm.system.Student;
 
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package studentsdorm.platform.Student;
+package studentsdorm.system.Student;
 
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import studentsdorm.platform.PDFGenerator;
+import studentsdorm.system.PDFGenerator;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;

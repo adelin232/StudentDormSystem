@@ -1,4 +1,4 @@
-package studentsdorm.platform.Aspects;
+package studentsdorm.system.Aspects;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 @Component
 public class LoggingAspect {
 
-    @Around("@annotation(studentsdorm.platform.Log)")
+    @Around("@annotation(studentsdorm.system.Log)")
     public Object log(ProceedingJoinPoint thisJoinPoint) throws Throwable {
         String methodName = thisJoinPoint.getSignature().getName();
         Object[] methodArgs = thisJoinPoint.getArgs();
@@ -36,7 +36,7 @@ public class LoggingAspect {
     public void springBeanPointcut() {
     }
 
-    @Pointcut("within(studentsdorm.platform.Student.*)")
+    @Pointcut("within(studentsdorm.system.Student.*)")
     public void applicationPackagePointcut() {
     }
 

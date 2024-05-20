@@ -1,4 +1,4 @@
-package studentsdorm.platform;
+package studentsdorm.system;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.DocumentException;
@@ -12,7 +12,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import lombok.Setter;
-import studentsdorm.platform.Student.Student;
+import studentsdorm.system.Student.Student;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

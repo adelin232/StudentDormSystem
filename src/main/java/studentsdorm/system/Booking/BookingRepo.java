@@ -1,4 +1,4 @@
-package studentsdorm.platform.Booking;
+package studentsdorm.system.Booking;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

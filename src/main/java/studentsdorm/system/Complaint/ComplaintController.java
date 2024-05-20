@@ -1,4 +1,4 @@
-package studentsdorm.platform.Complaint;
+package studentsdorm.system.Complaint;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

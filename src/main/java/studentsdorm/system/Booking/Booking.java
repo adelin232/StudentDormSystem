@@ -1,4 +1,4 @@
-package studentsdorm.platform.Booking;
+package studentsdorm.system.Booking;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

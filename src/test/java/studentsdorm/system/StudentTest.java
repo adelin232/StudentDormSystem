@@ -1,4 +1,4 @@
-package studentsdorm.platform;
+package studentsdorm.system;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import studentsdorm.platform.Student.Student;
-import studentsdorm.platform.Student.StudentRepo;
-import studentsdorm.platform.Student.StudentService;
+import studentsdorm.system.Student.Student;
+import studentsdorm.system.Student.StudentRepo;
+import studentsdorm.system.Student.StudentService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class StudentTest {
 
 	@Test
 	public void main() {
-		PlatformApplication.main(new String[] {});
+		SystemApplication.main(new String[] {});
 	}
 
 	@Test
@@ -40,11 +40,11 @@ public class StudentTest {
 		Student student = new Student();
 		student.setId(1L);
 		student.setName("Adelin");
-		student.setRoom(239L);
+//		student.setRoom(239L);
 		student.setPhone("0747553042");
 		student.setEmail("narcis.adelin.miulet@gmail.com");
-		student.setAvgGrade(8.56);
-		student.setEngCert(false);
+//		student.setAvgGrade(8.56);
+//		student.setEngCert(false);
 
 		students.add(student);
 
@@ -58,8 +58,8 @@ public class StudentTest {
 		Assertions.assertEquals(student.getRoom(), studentEntity.getRoom());
 		Assertions.assertEquals(student.getPhone(), studentEntity.getPhone());
 		Assertions.assertEquals(student.getEmail(), studentEntity.getEmail());
-		Assertions.assertEquals(student.getAvgGrade(), studentEntity.getAvgGrade());
-		Assertions.assertEquals(student.getEngCert(), studentEntity.getEngCert());
+//		Assertions.assertEquals(student.getAvgGrade(), studentEntity.getAvgGrade());
+//		Assertions.assertEquals(student.getEngCert(), studentEntity.getEngCert());
 		verify(studentRepo, times(1)).findById(1L);
 	}
 
@@ -86,7 +86,7 @@ public class StudentTest {
 		List<Student> students = new ArrayList<>();
 		Student student = new Student();
 
-		student.setRoom(239L);
+//		student.setRoom(239L);
 		students.add(student);
 
 		when(studentRepo.findByRoom(239L)).thenReturn(students.get(0));
@@ -101,8 +101,9 @@ public class StudentTest {
 	@DisplayName("Test getStudents Success")
 	public void testGetStudents() {
 		List<Student> students = new ArrayList<>();
-		Student student = new Student("Adelin", 239L, "0747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
-		studentService.createStudent(student); // just for Coverage (createStudent)
+//		Student student = new Student("Adelin", 239L, "0747553042", "narcis.adelin.miulet@gmail.com", 8.56, false);
+		Student student = new Student("Adelin", "239", "0747553042", "narcis.adelin.miulet@gmail.com");
+		studentService.createOrUpdateStudent(student); // just for Coverage (createStudent)
 
 		students.add(student);
 
