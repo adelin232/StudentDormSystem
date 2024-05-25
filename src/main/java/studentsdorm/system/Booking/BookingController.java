@@ -39,7 +39,7 @@ public class BookingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Booking>> readBookings(@RequestParam String userId) {
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(bookingService.readBookings(userId));
+    public ResponseEntity<List<Booking>> readAllBookings() {
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(bookingService.readAllBookings());
     }
 }

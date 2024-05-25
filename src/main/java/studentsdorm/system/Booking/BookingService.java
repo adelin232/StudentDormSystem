@@ -27,7 +27,7 @@ public class BookingService {
         int i = now.getHour();
         i = Math.max(i, 8);
 
-        for (; i <= 21; i++) {
+        for (; i <= 24; i++) {
             String time = String.format("%02d:00", i);
             Optional<Booking> bookingOptional = bookingRepository.findByWmNo(wmNo).stream()
                     .filter(booking -> booking.getStartHour().equals(time))
@@ -37,11 +37,11 @@ public class BookingService {
             hour.put("reserved", bookingOptional.isPresent());
             if (bookingOptional.isPresent()) {
                 Booking booking = bookingOptional.get();
-                System.out.println(booking.getUserId());
+//                System.out.println(booking.getUserId());
                 Student student = studentService.getStudentByUserId(booking.getUserId());
                 if (student != null) {
                     hour.put("userName", student.getName());
-                    System.out.println(hour.get("userName"));
+//                    System.out.println(hour.get("userName"));
                     hour.put("userPhone", student.getPhone());
                 }
             }
@@ -52,7 +52,7 @@ public class BookingService {
 
     public boolean canBook(String userId, String wmNo, String startHour) {
         boolean userHasBooking = bookingRepository.findByUserId(userId).stream()
-                .anyMatch(booking -> !booking.getStartHour().equals(startHour));
+                .anyMatch(booking -> (booking.getWmNo().equals(wmNo) && !booking.getStartHour().equals(startHour)));
         if (userHasBooking) {
             return false;
         }
@@ -84,8 +84,11 @@ public class BookingService {
         bookingRepository.deleteAll(expiredBookings);
     }
 
-    public List<Booking> readBookings(final String userId) {
-        System.out.println(bookingRepository.findAllByUserId(userId));
-        return bookingRepository.findAllByUserId(userId);
+//    public List<Booking> readBookings(final String userId) {
+//        return bookingRepository.findAllByUserId(userId);
+//    }
+
+    public List<Booking> readAllBookings() {
+        return bookingRepository.findAll();
     }
 }

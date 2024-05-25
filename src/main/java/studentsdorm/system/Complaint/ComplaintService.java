@@ -16,7 +16,6 @@ public class ComplaintService {
     }
 
     public List<Complaint> readComplaints() {
-        System.out.println(complaintRepo.findAll());
         return complaintRepo.findAll();
     }
 }

@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Service
 public class AdminService {
-    private final Set<String> adminUserIds = Set.of("I5emXUU7QiM6pDtjrhxXUHYn7N73");
+    private final Set<String> adminUserIds = Set.of("CeUSCXcT3bZmSNZ0LXdu15HKXvw2");
 
     public boolean isAdmin(String userId) {
         return adminUserIds.contains(userId);

@@ -2,13 +2,10 @@ package studentsdorm.system.Student;
 
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import studentsdorm.system.PDFGenerator;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +15,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/students")
@@ -27,9 +26,26 @@ public class StudentController {
     private StudentService studentService;
 
     @PutMapping("/create")
-    public ResponseEntity<String> createBooking(@RequestBody Student student) {
-        studentService.createOrUpdateStudent(student);
-        return ResponseEntity.ok("Student created successfully");
+    public ResponseEntity<?> createOrUpdateStudent(@RequestBody Student student) throws ExecutionException, InterruptedException {
+        Optional<Student> existingStudent = Optional.ofNullable(studentService.getStudent(student.getUserId()));
+        if (existingStudent.isPresent()) {
+            studentService.createOrUpdateStudent(student);
+            return ResponseEntity.ok("Profilul a fost actualizat.");
+        } else {
+            studentService.createOrUpdateStudent(student);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Profilul a fost creat.");
+        }
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getStudentProfile(@RequestParam String userId) throws ExecutionException, InterruptedException {
+        Optional<Student> studentOpt = Optional.ofNullable(studentService.getStudent(userId));
+        if (studentOpt.isPresent()) {
+            Student student = studentOpt.get();
+            return ResponseEntity.ok(student);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Profilul nu a fost găsit.");
+        }
     }
 
     @GetMapping
