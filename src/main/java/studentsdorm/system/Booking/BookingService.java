@@ -5,10 +5,8 @@ import org.springframework.stereotype.Service;
 import studentsdorm.system.Student.Student;
 import studentsdorm.system.Student.StudentService;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+//import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
@@ -19,15 +17,15 @@ public class BookingService {
     @Autowired
     private StudentService studentService;
 
-    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+//    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
     public List<Map<String, Object>> getAvailableHours(String wmNo) {
         List<Map<String, Object>> availableHours = new ArrayList<>();
-        LocalDateTime now = LocalDateTime.now();
-        int i = now.getHour();
-        i = Math.max(i, 8);
+//        LocalDateTime now = LocalDateTime.now();
+//        int i = now.getHour();
+//        i = Math.max(i, 8);
 
-        for (; i <= 24; i++) {
+        for (int i = 8; i <= 21; i++) {
             String time = String.format("%02d:00", i);
             Optional<Booking> bookingOptional = bookingRepository.findByWmNo(wmNo).stream()
                     .filter(booking -> booking.getStartHour().equals(time))
@@ -72,23 +70,15 @@ public class BookingService {
         }
     }
 
-    public void deleteExpiredBookings() {
-        List<Booking> allBookings = bookingRepository.findAll();
-        LocalDateTime now = LocalDateTime.now();
-        List<Booking> expiredBookings = allBookings.stream()
-                .filter(booking -> {
-                    LocalDateTime bookingTime = LocalDateTime.parse(booking.getStartHour(), dateTimeFormatter);
-                    return bookingTime.isBefore(now);
-                })
-                .collect(Collectors.toList());
-        bookingRepository.deleteAll(expiredBookings);
-    }
-
 //    public List<Booking> readBookings(final String userId) {
 //        return bookingRepository.findAllByUserId(userId);
 //    }
 
     public List<Booking> readAllBookings() {
         return bookingRepository.findAll();
+    }
+
+    public void deleteBooking(Long id) {
+        bookingRepository.deleteById(id);
     }
 }

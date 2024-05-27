@@ -9,13 +9,13 @@ import java.util.List;
 public class ComplaintService {
 
     @Autowired
-    private ComplaintRepo complaintRepo;
+    private ComplaintRepository complaintRepository;
 
     public void createComplaint(final Complaint complaint) {
-        complaintRepo.save(complaint);
+        complaintRepository.save(complaint);
     }
 
     public List<Complaint> readComplaints() {
-        return complaintRepo.findAll();
+        return complaintRepository.findAll();
     }
 }
