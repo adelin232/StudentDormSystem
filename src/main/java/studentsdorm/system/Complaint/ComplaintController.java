@@ -24,4 +24,10 @@ public class ComplaintController {
     public ResponseEntity<List<Complaint>> readComplaints() {
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(complaintService.readComplaints());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteComplaint(@PathVariable Long id) {
+        complaintService.deleteComplaint(id);
+        return ResponseEntity.noContent().build();
+    }
 }

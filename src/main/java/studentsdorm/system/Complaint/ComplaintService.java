@@ -18,4 +18,8 @@ public class ComplaintService {
     public List<Complaint> readComplaints() {
         return complaintRepository.findAll();
     }
+
+    public void deleteComplaint(Long id) {
+        complaintRepository.deleteById(id);
+    }
 }
