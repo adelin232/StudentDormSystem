@@ -49,7 +49,7 @@ public class BookingService {
     }
 
     public boolean canBook(String userId, String wmNo, String startHour) {
-        boolean userHasBooking = bookingRepository.findByUserId(userId).stream()
+        boolean userHasBooking = bookingRepository.findBookingsByUserId(userId).stream()
                 .anyMatch(booking -> (booking.getWmNo().equals(wmNo) && !booking.getStartHour().equals(startHour)));
         if (userHasBooking) {
             return false;
@@ -80,5 +80,9 @@ public class BookingService {
 
     public void deleteBooking(Long id) {
         bookingRepository.deleteById(id);
+    }
+
+    public List<Booking> getBookingsByUserId(String userId) {
+        return bookingRepository.findBookingsByUserId(userId);
     }
 }
