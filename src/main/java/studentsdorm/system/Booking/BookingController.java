@@ -33,14 +33,14 @@ public class BookingController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<Booking>> readAllBookings() {
-        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(bookingService.readAllBookings());
-    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
         bookingService.deleteBooking(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Booking>> readAllBookings() {
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(bookingService.readAllBookings());
     }
 }

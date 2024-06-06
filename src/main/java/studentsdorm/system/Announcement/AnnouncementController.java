@@ -38,7 +38,6 @@ public class AnnouncementController {
         return ResponseEntity.ok(updatedAnnouncement);
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAnnouncement(@PathVariable(value = "id") Long id) {
         announcementService.deleteAnnouncement(id);

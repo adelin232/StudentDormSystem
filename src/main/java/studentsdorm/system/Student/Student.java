@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @Table(name = "STUDENTS", schema = "STUDENTDB")
 public class Student extends StudentAbstract {
 
+    private String userId;
     private String name;
     private String room;
     private String phone;
