@@ -17,9 +17,7 @@ public class StudentService {
 
     public Student getStudent(final String id) throws ExecutionException, InterruptedException {
         CompletableFuture<List<Student>> future = CompletableFuture.supplyAsync(this::getStudents);
-
         List<Student> students = future.get().stream().filter(studentEntity -> Objects.equals(studentEntity.getUserId(), id)).toList();
-
         return students.size() == 1 ? students.get(0) : null;
     }
 
@@ -47,7 +45,6 @@ public class StudentService {
     @Log
     public void createOrUpdateStudent(final Student student) {
         Student existingStudent = studentRepository.findByUserId(student.getUserId());
-
         if (existingStudent != null) {
             existingStudent.setName(student.getName());
             existingStudent.setEmail(student.getEmail());
